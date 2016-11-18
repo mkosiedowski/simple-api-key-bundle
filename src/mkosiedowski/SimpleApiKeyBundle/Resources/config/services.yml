@@ -1,0 +1,33 @@
+parameters:
+    mkosiedowski.simple_api_key.provider.api_key.class:       mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider\SimpleApiKeyProvider
+    mkosiedowski.simple_api_key.listener.api_key.class:       mkosiedowski\SimpleApiKeyBundle\Security\Firewall\SimpleApiKeyListener
+    mkosiedowski.simple_api_key.application_provider.class:   mkosiedowski\SimpleApiKeyBundle\Entity\ApplicationProvider
+
+    mkosiedowski.simple_api_key.extractor.query.class:        mkosiedowski\SimpleApiKeyBundle\Extractor\QueryExtractor
+    mkosiedowski.simple_api_key.extractor.header.class:       mkosiedowski\SimpleApiKeyBundle\Extractor\HeaderExtractor
+    
+    mkosiedowski.simple_api_key.generator.class:              mkosiedowski\SimpleApiKeyBundle\Util\ApiKeyGenerator
+    
+services:
+    mkosiedowski.simple_api_key.provider.api_key:
+        class: "%mkosiedowski.simple_api_key.provider.api_key.class%"
+        arguments: ["@mkosiedowski.simple_api_key.application.provider"]
+    mkosiedowski.simple_api_key.listener.api_key:
+        class: "%mkosiedowski.simple_api_key.listener.api_key.class%"
+        arguments: ["@security.token_storage", "@security.authentication.manager", "@mkosiedowski.simple_api_key.extractor"]
+
+    mkosiedowski.simple_api_key.application.provider:
+        class: "%mkosiedowski.simple_api_key.application_provider.class%"
+        arguments: ["@doctrine.orm.default_entity_manager"]
+        public: false
+    mkosiedowski.simple_api_key.extractor.query:
+        class: "%mkosiedowski.simple_api_key.extractor.query.class%"
+        arguments: ["%mkosiedowski.simple_api_key.parameter_name%"]
+        public: false
+    mkosiedowski.simple_api_key.extractor.header:
+        class: "%mkosiedowski.simple_api_key.extractor.header.class%"
+        arguments: ["%mkosiedowski.simple_api_key.parameter_name%"]
+        public: false
+    mkosiedowski.simple_api_key.generator:
+        class: "%mkosiedowski.simple_api_key.generator.class%"
+        public: false
