@@ -1,10 +1,11 @@
 <?php
 
-namespace mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider;
+namespace mkosiedowski\SimpleApiKeyBundle\Model;
 
-use mkosiedowski\SimpleApiKeyBundle\Model\Application;
-
-interface AppProviderInterface
+/**
+ * @author Maciej Kosiedowski <mkosied@gmail.com>
+ */
+interface ApplicationProviderInterface
 {
     /**
      * @param string $apiKey

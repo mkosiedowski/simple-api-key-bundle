@@ -3,9 +3,9 @@
 namespace mkosiedowski\SimpleApiKeyBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
-use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider\AppProviderInterface;
+use mkosiedowski\SimpleApiKeyBundle\Model\ApplicationProviderInterface;
 
-class ApplicationProvider implements AppProviderInterface
+class ApplicationProvider implements ApplicationProviderInterface
 {
     /** @var EntityManager */
     private $manager;

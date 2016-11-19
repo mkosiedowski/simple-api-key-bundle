@@ -2,11 +2,12 @@
 
 namespace mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider;
 
+use mkosiedowski\SimpleApiKeyBundle\Model\ApplicationProviderInterface;
+use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider\ApiKeyUserProviderInterface;
+use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Token\SimpleApiKeyToken;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Token\SimpleApiKeyToken;
-use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider\ApiKeyUserProviderInterface;
 
 /**
  * @author Maciej Kosiedowski <mkosied@gmail.com>
@@ -14,11 +15,11 @@ use mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Provider\ApiKeyUserP
 class SimpleApiKeyProvider implements AuthenticationProviderInterface
 {
     /**
-     * @var AppProviderInterface
+     * @var ApplicationProviderInterface
      */
     protected $applicationProvider;
 
-    public function __construct(AppProviderInterface $appProvider)
+    public function __construct(ApplicationProviderInterface $appProvider)
     {
         $this->applicationProvider = $appProvider;
     }
