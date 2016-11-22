@@ -53,6 +53,7 @@ class SimpleApiKeyListener implements ListenerInterface
         if (!$this->keyExtractor->hasKey($request)) {
             $response = new Response();
             $response->setStatusCode(401);
+            $response->setContent(json_encode(['error' => 'No API Key provided']));
             $event->setResponse($response);
         } else {
             try {
@@ -63,6 +64,7 @@ class SimpleApiKeyListener implements ListenerInterface
             } catch (AuthenticationException $failed) {
                 $response = new Response();
                 $response->setStatusCode(403);
+                $response->setContent(json_encode(['error' => 'Invalid API Key']));
                 $event->setResponse($response);
             }
         }
