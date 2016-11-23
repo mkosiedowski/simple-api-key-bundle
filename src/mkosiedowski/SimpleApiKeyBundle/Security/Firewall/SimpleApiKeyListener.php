@@ -17,9 +17,9 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 class SimpleApiKeyListener implements ListenerInterface
 {
     /**
-     * @var TokenStorageInterface
+     * @var boolean
      */
-    private $tokenStorage;
+    private $enabled;
 
     /**
      * @var AuthenticationManagerInterface
@@ -32,11 +32,11 @@ class SimpleApiKeyListener implements ListenerInterface
     private $keyExtractor;
 
     public function __construct(
-        TokenStorageInterface $tokenStorage,
+        $enabled,
         AuthenticationManagerInterface $manager,
         KeyExtractor $keyExtractor
     ) {
-        $this->tokenStorage = $tokenStorage;
+        $this->enabled = $enabled;
         $this->authenticationManager = $manager;
         $this->keyExtractor = $keyExtractor;
     }
@@ -48,6 +48,9 @@ class SimpleApiKeyListener implements ListenerInterface
      */
     public function handle(GetResponseEvent $event)
     {
+        if ($this->enabled === false) {
+            return;
+        }
         $request = $event->getRequest();
 
         if (!$this->keyExtractor->hasKey($request)) {

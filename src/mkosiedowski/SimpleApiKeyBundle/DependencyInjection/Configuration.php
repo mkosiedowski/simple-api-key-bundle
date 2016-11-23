@@ -23,10 +23,13 @@ class Configuration implements ConfigurationInterface
                         ->ifNotInArray(array('query', 'header'))
                         ->thenInvalid('Unknown authentication delivery type "%s".')
                      ->end()
-                 ->end()
+                ->end()
                 ->scalarNode('parameter_name')
                     ->defaultValue('apiKey')
-                 ->end()
+                ->end()
+                ->booleanNode('enabled')
+                    ->defaultValue(true)
+                ->end()
             ->end()
         ;
 

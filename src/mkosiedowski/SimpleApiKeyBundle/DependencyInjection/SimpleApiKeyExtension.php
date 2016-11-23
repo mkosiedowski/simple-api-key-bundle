@@ -25,6 +25,7 @@ class SimpleApiKeyExtension extends Extension
         $loader->load('services.yml');
 
         $this->defineKeyExtractor($config, $container);
+        $container->setParameter('mkosiedowski.simple_api_key.enabled', $config['enabled']);
     }
 
     private function defineKeyExtractor(array $config, ContainerBuilder $container)
