@@ -39,6 +39,8 @@ class SimpleApiKeyProvider implements AuthenticationProviderInterface
 
         if ($application) {
             $authenticatedToken = new SimpleApiKeyToken();
+            $authenticatedToken->setApplication($application);
+            $authenticatedToken->setApiKey($token->getCredentials());
             $authenticatedToken->setAuthenticated(true);
 
             return $authenticatedToken;

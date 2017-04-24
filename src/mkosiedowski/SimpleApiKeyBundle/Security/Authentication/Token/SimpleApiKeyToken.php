@@ -2,6 +2,7 @@
 
 namespace mkosiedowski\SimpleApiKeyBundle\Security\Authentication\Token;
 
+use mkosiedowski\SimpleApiKeyBundle\Model\Application;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
@@ -11,6 +12,9 @@ class SimpleApiKeyToken extends AbstractToken
 {
     /** @var string */
     protected $apiKey;
+
+    /** @var Application */
+    protected $application;
 
     /**
      * @return string
@@ -34,5 +38,21 @@ class SimpleApiKeyToken extends AbstractToken
     public function getApiKey()
     {
         return $this->apiKey;
+    }
+
+    /**
+     * @return Application
+     */
+    public function getApplication()
+    {
+        return $this->application;
+    }
+
+    /**
+     * @param Application $application
+     */
+    public function setApplication($application)
+    {
+        $this->application = $application;
     }
 }

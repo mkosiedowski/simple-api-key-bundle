@@ -14,7 +14,11 @@ services:
         arguments: ["@mkosiedowski.simple_api_key.application.provider"]
     mkosiedowski.simple_api_key.listener.api_key:
         class: "%mkosiedowski.simple_api_key.listener.api_key.class%"
-        arguments: ["%mkosiedowski.simple_api_key.enabled%", "@security.authentication.manager", "@mkosiedowski.simple_api_key.extractor"]
+        arguments:
+            - "%mkosiedowski.simple_api_key.enabled%"
+            - "@security.authentication.manager"
+            - "@mkosiedowski.simple_api_key.extractor"
+            - "@mkosiedowski.simple_api_key.token_storage"
 
     mkosiedowski.simple_api_key.application.provider:
         class: "%mkosiedowski.simple_api_key.application_provider.class%"
@@ -31,3 +35,5 @@ services:
     mkosiedowski.simple_api_key.generator:
         class: "%mkosiedowski.simple_api_key.generator.class%"
         public: false
+    mkosiedowski.simple_api_key.token_storage:
+        class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage

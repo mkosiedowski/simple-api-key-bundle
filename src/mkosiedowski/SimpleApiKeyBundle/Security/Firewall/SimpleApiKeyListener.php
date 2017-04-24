@@ -26,6 +26,9 @@ class SimpleApiKeyListener implements ListenerInterface
      */
     private $authenticationManager;
 
+    /** @var TokenStorageInterface */
+    private $tokenStorage;
+
     /**
      * @var KeyExtractor
      */
@@ -34,11 +37,13 @@ class SimpleApiKeyListener implements ListenerInterface
     public function __construct(
         $enabled,
         AuthenticationManagerInterface $manager,
-        KeyExtractor $keyExtractor
+        KeyExtractor $keyExtractor,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->enabled = $enabled;
         $this->authenticationManager = $manager;
         $this->keyExtractor = $keyExtractor;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -63,7 +68,8 @@ class SimpleApiKeyListener implements ListenerInterface
                 $apiKey = $this->keyExtractor->extractKey($request);
                 $token = new SimpleApiKeyToken();
                 $token->setApiKey($apiKey);
-                $this->authenticationManager->authenticate($token);
+                $authenticatedToken = $this->authenticationManager->authenticate($token);
+                $this->tokenStorage->setToken($authenticatedToken);
             } catch (AuthenticationException $failed) {
                 $response = new Response();
                 $response->setStatusCode(403);
