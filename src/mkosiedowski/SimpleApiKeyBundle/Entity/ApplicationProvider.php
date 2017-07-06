@@ -34,6 +34,12 @@ class ApplicationProvider implements ApplicationProviderInterface
     }
 
     /** @inheritdoc */
+    public function getAll()
+    {
+        return $this->manager->getRepository(Application::class)->findAll();
+    }
+
+    /** @inheritdoc */
     public function create($name)
     {
         return new Application($name);

@@ -23,7 +23,7 @@ services:
     mkosiedowski.simple_api_key.application.provider:
         class: "%mkosiedowski.simple_api_key.application_provider.class%"
         arguments: ["@doctrine.orm.default_entity_manager"]
-        public: false
+        public: true
     mkosiedowski.simple_api_key.extractor.query:
         class: "%mkosiedowski.simple_api_key.extractor.query.class%"
         arguments: ["%mkosiedowski.simple_api_key.parameter_name%"]

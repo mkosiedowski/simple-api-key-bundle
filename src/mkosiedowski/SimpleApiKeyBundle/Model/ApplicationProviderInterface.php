@@ -23,4 +23,9 @@ interface ApplicationProviderInterface
      * @return Application
      */
     public function create($name);
+
+    /**
+     * @return Application[]
+     */
+    public function getAll();
 }
