@@ -20,6 +20,7 @@ services:
             - "@mkosiedowski.simple_api_key.extractor"
             - "@mkosiedowski.simple_api_key.token_storage"
 
+    mkosiedowski\SimpleApiKeyBundle\Model\ApplicationProviderInterface: '@mkosiedowski.simple_api_key.application.provider'
     mkosiedowski.simple_api_key.application.provider:
         class: "%mkosiedowski.simple_api_key.application_provider.class%"
         arguments: ["@doctrine.orm.default_entity_manager"]
