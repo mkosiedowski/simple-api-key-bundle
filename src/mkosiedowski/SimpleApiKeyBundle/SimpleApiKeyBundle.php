@@ -16,8 +16,9 @@ class SimpleApiKeyBundle extends Bundle
     {
         parent::build($container);
 
-        /** @var SecurityExtension $extension */
         $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new SimpleApiKeyFactory());
+        if ($extension instanceof SecurityExtension) {
+            $extension->addSecurityListenerFactory(new SimpleApiKeyFactory());
+        }
     }
 }

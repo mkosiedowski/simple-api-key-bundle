@@ -37,4 +37,5 @@ services:
         class: "%mkosiedowski.simple_api_key.generator.class%"
         public: false
     mkosiedowski.simple_api_key.token_storage:
+        public: true
         class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage

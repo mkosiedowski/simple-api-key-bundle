@@ -2,7 +2,6 @@
 
 namespace mkosiedowski\SimpleApiKeyBundle\Command;
 
-use mkosiedowski\SimpleApiKeyBundle\Entity\ApplicationProvider;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,7 +26,7 @@ class CreateApplicationCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var ApplicationProvider $provider */
+        /** @var \mkosiedowski\SimpleApiKeyBundle\Entity\ApplicationProvider $provider */
         $provider = $this->getContainer()->get('mkosiedowski.simple_api_key.application.provider');
 
         $application = $provider->create($input->getArgument('name'));
